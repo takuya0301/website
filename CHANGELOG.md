@@ -1,3 +1,8 @@
+### 1.3.2: 2014-12-18
+
+* Update to WordPress 4.1
+* Remove WPLANG constant
+
 ### 1.3.1: 2014-11-28
 
 * Add Capistrano task to fix/update WP theme paths after deploys
