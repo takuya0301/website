@@ -55,6 +55,13 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
 define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
+define('FORCE_SSL_ADMIN', true);
+$envs = array(
+  'development' => 'http://example.dev',
+  'staging'     => 'http://staging.example.com',
+  'production'  => 'http://example.com'
+);
+define('ENVIRONMENTS', serialize($envs));
 
 /**
  * Bootstrap WordPress

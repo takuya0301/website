@@ -59,7 +59,10 @@
     "wordpress/wordpress-ja": "4.1",
     "fancyguy/webroot-installer": "1.1.0",
     "composer/installers": "v1.0.12",
-    "vlucas/phpdotenv": "1.0.9"
+    "vlucas/phpdotenv": "1.0.9",
+    "roots/soil": "3.0.2",
+    "roots/wp-stage-switcher": "1.0.3",
+    "wpackagist-plugin/wp-multibyte-patch": "2.2"
   },
   "extra": {
     "installer-paths": {
