@@ -1,24 +1,31 @@
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'example.com'
+set :repo_url, 'https://github.com/takuya0301/website.git'
 
 # Branch options
 # Prompts for the branch name (defaults to current branch)
-#ask :branch, -> { `git rev-parse --abbrev-ref HEAD`.chomp }
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Hardcodes branch to always be master
 # This could be overridden in a stage config file
-set :branch, :master
+#set :branch, :master
 
-set :deploy_to, -> { "/srv/www/#{fetch(:application)}" }
+set :deploy_to, -> { "/var/www/html/#{fetch(:application)}/#{fetch(:stage)}" }
 
 # Use :debug for more verbose output when troubleshooting
 set :log_level, :info
 
 # Apache users with .htaccess files:
 # it needs to be added to linked_files so it persists across deploys:
-# set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
-set :linked_files, fetch(:linked_files, []).push('.env')
+set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
+#set :linked_files, fetch(:linked_files, []).push('.env')
 set :linked_dirs, fetch(:linked_dirs, []).push('web/app/uploads')
+
+set :theme_path, -> { releases_path.join(release_timestamp).join("web/app/themes/example") }
+set :npm_target_path, fetch(:theme_path)
+set :npm_flags, "--silent"
+set :grunt_target_path, fetch(:theme_path)
+set :grunt_tasks, 'build'
+before 'deploy:updated', 'grunt'
 
 namespace :deploy do
   desc 'Restart application'
