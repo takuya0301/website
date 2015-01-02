@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/mikaelengstrom/capistrano-wpcli.git
+  revision: 87bdffafd7a44cf710ce2e7f061c0f0861f00287
+  branch: vagrant-fix
+  specs:
+    capistrano-wpcli (0.0.9)
+      capistrano (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,3 +38,4 @@ DEPENDENCIES
   capistrano-composer
   capistrano-grunt
   capistrano-npm
+  capistrano-wpcli!

@@ -9,7 +9,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 # This could be overridden in a stage config file
 #set :branch, :master
 
-set :deploy_to, -> { "/var/www/html/#{fetch(:application)}/#{fetch(:stage)}" }
+set :deploy_to, -> { "/var/www/html" }
 
 # Use :debug for more verbose output when troubleshooting
 set :log_level, :info
@@ -20,12 +20,24 @@ set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
 #set :linked_files, fetch(:linked_files, []).push('.env')
 set :linked_dirs, fetch(:linked_dirs, []).push('web/app/uploads')
 
+# Theme path
 set :theme_path, -> { releases_path.join(release_timestamp).join("web/app/themes/example") }
+
+# npm
 set :npm_target_path, fetch(:theme_path)
 set :npm_flags, "--silent"
+
+# Grunt
 set :grunt_target_path, fetch(:theme_path)
 set :grunt_tasks, 'build'
 before 'deploy:updated', 'grunt'
+
+# WP-CLI
+set :wpcli_remote_url, 'http://example.com'
+set :wpcli_local_url, 'http://example.dev'
+set :wpcli_rsync_options, '-avz --rsh=ssh -e "ssh -i /Users/takuya/.ssh/p-wordpress.pem"'
+server "example.dev", user: 'vagrant', password: 'vagrant', roles: %w{dev}
+set :dev_path, '/srv/www/example.dev/current'
 
 namespace :deploy do
   desc 'Restart application'
